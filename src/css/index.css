@@ -1,0 +1,29 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 10px 8px;
+  font-size: 19px;
+  font-family: 'Noto Sans JP', sans-serif;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+}
+
+a:link,
+a:visited,
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

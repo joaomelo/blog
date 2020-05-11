@@ -4,8 +4,12 @@
   "description": "my personal blog",
   "main": "index.js",
   "scripts": {
-    "start": "eleventy --serve",
-    "build": "eleventy"
+    "clean": "rimraf dist/*",
+    "start": "npm run clean && eleventy --serve",
+    "build": "npm run clean && eleventy",
+    "commit": "git add -A && git commit",
+    "push": "git push && git push --tags",
+    "release": "npm run build && npm run commit && npm version patch && npm run push"
   },
   "repository": {
     "type": "git",
@@ -21,6 +25,8 @@
   },
   "homepage": "https://github.com/joaomelo/blog#readme",
   "devDependencies": {
-    "@11ty/eleventy": "^0.11.0"
+    "@11ty/eleventy": "^0.11.0",
+    "moment": "^2.25.3",
+    "rimraf": "^3.0.2"
   }
 }
