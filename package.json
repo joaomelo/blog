@@ -4,7 +4,8 @@
   "description": "my personal blog",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "eleventy --serve",
+    "build": "eleventy"
   },
   "repository": {
     "type": "git",
@@ -18,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/joaomelo/blog/issues"
   },
-  "homepage": "https://github.com/joaomelo/blog#readme"
+  "homepage": "https://github.com/joaomelo/blog#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^0.11.0"
+  }
 }
