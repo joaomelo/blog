@@ -4,25 +4,26 @@
   <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1" /> 
 
-  <link href="/css/index.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
+  <link href="https://unpkg.com/sanitize.css/page.css" rel="stylesheet" />
+
+  <!-- capture the CSS content as a Nunjucks variable -->
+  
+  <!-- feed it through our cssmin filter to minify -->
+  <style>
+    .header{grid-area:header}.content{grid-area:content}.sidebar{grid-area:sidebar}.container{display:grid;grid-gap:10px 50px;grid-template-areas:"header" "content" "sidebar"}@media (min-width:500px){.container{grid-template-columns:1fr 3fr;grid-template-areas:"header  header" "sidebar content"}}html{font-family:'Noto Sans JP',sans-serif}a{color:#000;text-decoration:none}a:hover{text-decoration:underline}h1{margin-top:0;margin-bottom:0}.header{text-align:center}
+  </style>
 
   <title>blog.melo.plus</title>
 </head> 
-<body> 
-  <aside>
-    <section id="home">
-      <a a href="/blog/">Home<a>
-    </section>
-    <section id="tags">a lot of tags</section>
-    <section id="me">
-      <h2>Hi! Me name is João Melo</h2>
-      <p>I write because...</p>
-      <p>You can find me in Twitter, GitHub and LinkedIn</p>
-    </section>
-  </aside> 
-  <main> 
-    
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="/blog/">blog.melo.plus</a>
+    </header>
+    <main class="content"> 
+      
   <article>
     <h1>
       <a href="/blog/posts/2020/20200512-my-third-post/">My Third Post</a>
@@ -47,6 +48,15 @@
     <time datetime="2020-05-11T00:00:00.000Z">May 10, 2020</time>
   </article>
 
-  </main> 
+    </main>   
+    <aside class="sidebar">
+      <section class="tags">
+        <p>a lot of tags</p>
+      </section>
+      <section class="me">
+        <p>Hi! Me name is João Melo. I write because... You can find me in Twitter, GitHub and LinkedIn</p>
+      </section>
+    </aside> 
+  </div>
 </body> 
 </html>

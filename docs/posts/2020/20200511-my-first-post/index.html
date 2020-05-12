@@ -4,25 +4,26 @@
   <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1" /> 
 
-  <link href="/css/index.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
+  <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
+  <link href="https://unpkg.com/sanitize.css/page.css" rel="stylesheet" />
+
+  <!-- capture the CSS content as a Nunjucks variable -->
+  
+  <!-- feed it through our cssmin filter to minify -->
+  <style>
+    .header{grid-area:header}.content{grid-area:content}.sidebar{grid-area:sidebar}.container{display:grid;grid-gap:10px 50px;grid-template-areas:"header" "content" "sidebar"}@media (min-width:500px){.container{grid-template-columns:1fr 3fr;grid-template-areas:"header  header" "sidebar content"}}html{font-family:'Noto Sans JP',sans-serif}a{color:#000;text-decoration:none}a:hover{text-decoration:underline}h1{margin-top:0;margin-bottom:0}.header{text-align:center}
+  </style>
 
   <title>blog.melo.plus</title>
 </head> 
-<body> 
-  <aside>
-    <section id="home">
-      <a a href="/blog/">Home<a>
-    </section>
-    <section id="tags">a lot of tags</section>
-    <section id="me">
-      <h2>Hi! Me name is João Melo</h2>
-      <p>I write because...</p>
-      <p>You can find me in Twitter, GitHub and LinkedIn</p>
-    </section>
-  </aside> 
-  <main> 
-    <article>
+<body>
+  <div class="container">
+    <header class="header">
+      <a href="/blog/">blog.melo.plus</a>
+    </header>
+    <main class="content"> 
+      <article>
   <h1>My First Post</h1> 
   <time datetime="2020-05-11T00:00:00.000Z">May 10, 2020</time> 
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id ipsum et metus hendrerit gravida. Integer imperdiet turpis ut quam aliquam, efficitur mattis diam suscipit. Proin ultrices vel sapien in condimentum. Vestibulum elementum lectus vel nunc ultrices, a ornare quam viverra. Cras quis massa a mauris scelerisque egestas ac ac sapien. Pellentesque a volutpat ex. In fringilla mi sem, cursus ullamcorper enim imperdiet nec. Phasellus ultrices tempor erat, nec sagittis velit sagittis sed. Aenean ullamcorper neque non libero imperdiet commodo. In viverra ullamcorper porttitor. Aliquam a convallis ante, id faucibus nisi. Nullam nec nunc egestas, auctor est et, malesuada tellus. Etiam commodo turpis ac semper tempus. Vestibulum varius imperdiet urna.</p>
@@ -32,6 +33,15 @@
 <p>Donec a interdum tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed condimentum nulla in risus mollis, at ornare nisi convallis. Integer vitae nunc scelerisque, tempor metus ut, semper purus. Suspendisse nec pulvinar purus. Duis ac nisl diam. Sed lorem erat, porta in mollis id, fermentum id elit. Sed vitae tincidunt sapien. Praesent nec metus eget libero commodo interdum eu nec leo. Phasellus eleifend purus augue, in viverra ex hendrerit quis. Duis maximus, magna vitae sagittis sollicitudin, diam neque suscipit urna, quis aliquam tortor est sed risus. Aliquam vitae pretium diam. Quisque faucibus ac nulla quis faucibus. Vestibulum dictum condimentum rutrum.</p>
 
 </article>
-  </main> 
+    </main>   
+    <aside class="sidebar">
+      <section class="tags">
+        <p>a lot of tags</p>
+      </section>
+      <section class="me">
+        <p>Hi! Me name is João Melo. I write because... You can find me in Twitter, GitHub and LinkedIn</p>
+      </section>
+    </aside> 
+  </div>
 </body> 
 </html>
