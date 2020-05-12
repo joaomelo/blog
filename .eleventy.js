@@ -14,10 +14,11 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("css");
 
   return {
-    dir: {
-      input: "src",
-      output: "docs"
-    }
+      pathPrefix: "/blog/",
+      dir: {
+        input: "src",
+        output: "docs"
+      }
   }
 };
 
