@@ -1,31 +1,23 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-<head> 
-  <meta charset="utf-8"> 
-  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
 
-  <link href="https://unpkg.com/sanitize.css" rel="stylesheet" />
-  <link href="https://unpkg.com/sanitize.css/typography.css" rel="stylesheet" />
-  <link href="https://unpkg.com/sanitize.css/page.css" rel="stylesheet" />
 
-  <!-- capture the CSS content as a Nunjucks variable -->
-  
-  <!-- feed it through our cssmin filter to minify -->
-  <style>
-    .header{grid-area:header}.content{grid-area:content}.sidebar{grid-area:sidebar}.container{display:grid;grid-gap:10px 50px;grid-template-areas:"header" "content" "sidebar"}@media (min-width:500px){.container{grid-template-columns:1fr 3fr;grid-template-areas:"header  header" "sidebar content"}}html{font-family:'Noto Sans JP',sans-serif}a{color:#000;text-decoration:none}a:hover{text-decoration:underline}h1{margin-top:0;margin-bottom:0}.header{text-align:center}
-  </style>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
-  <title>blog.melo.plus</title>
-</head> 
-<body>
-  <div class="container">
-    <header class="header">
-      <a href="/blog/">blog.melo.plus</a>
-    </header>
-    <main class="content"> 
-      <article>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>blog.melo.plus</title>
+  </head>
+  <body class="bg-green-100 text-gray-700">
+    <div class="h-screen max-w-screen-sm mx-auto px-4 bg-white">
+      <header class="text-right">
+  <a href="/blog/" target="_self" class="font-semibold text-gray-700 rounded-full hover:text-green-400">home</a>
+</header>
+      <main>
+        <article>
   <h1>My First Post</h1> 
-  <time datetime="2020-05-11T00:00:00.000Z">May 10, 2020</time> 
+  <time class="text-xs" datetime="2020-05-15T23:44:52.295Z">May 15, 2020</time>
   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id ipsum et metus hendrerit gravida. Integer imperdiet turpis ut quam aliquam, efficitur mattis diam suscipit. Proin ultrices vel sapien in condimentum. Vestibulum elementum lectus vel nunc ultrices, a ornare quam viverra. Cras quis massa a mauris scelerisque egestas ac ac sapien. Pellentesque a volutpat ex. In fringilla mi sem, cursus ullamcorper enim imperdiet nec. Phasellus ultrices tempor erat, nec sagittis velit sagittis sed. Aenean ullamcorper neque non libero imperdiet commodo. In viverra ullamcorper porttitor. Aliquam a convallis ante, id faucibus nisi. Nullam nec nunc egestas, auctor est et, malesuada tellus. Etiam commodo turpis ac semper tempus. Vestibulum varius imperdiet urna.</p>
 <p>Morbi aliquam mi non egestas dictum. Integer urna diam, laoreet vitae ultrices et, accumsan ut arcu. Nulla tempus tortor lectus, id aliquam ante scelerisque sed. Curabitur convallis vulputate tellus. Ut ullamcorper velit a aliquet vestibulum. Cras eget mauris metus. Nunc congue ornare arcu, pharetra finibus purus laoreet sed.</p>
 <p>In id purus vel urna mattis tincidunt eget a lorem. Morbi fringilla, diam non rutrum faucibus, turpis neque bibendum orci, vel condimentum eros leo id arcu. Integer porta arcu non sodales lacinia. Fusce libero metus, congue vel sapien eget, luctus viverra leo. Aenean vulputate felis ac porttitor malesuada. Suspendisse auctor mi eget ex pretium, sed lobortis nisi tincidunt. Duis erat nulla, congue quis dui vitae, interdum posuere velit. Nam quis erat at magna consectetur hendrerit. Etiam condimentum diam nec tincidunt consectetur. Fusce a felis non lacus ultricies volutpat a malesuada tortor. In eu dui vitae sem maximus porta eget sit amet quam. Nunc sodales porttitor sem, non molestie tortor maximus vel. Maecenas et purus eu nulla accumsan semper. Vestibulum non orci nulla.</p>
@@ -33,15 +25,46 @@
 <p>Donec a interdum tortor. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed condimentum nulla in risus mollis, at ornare nisi convallis. Integer vitae nunc scelerisque, tempor metus ut, semper purus. Suspendisse nec pulvinar purus. Duis ac nisl diam. Sed lorem erat, porta in mollis id, fermentum id elit. Sed vitae tincidunt sapien. Praesent nec metus eget libero commodo interdum eu nec leo. Phasellus eleifend purus augue, in viverra ex hendrerit quis. Duis maximus, magna vitae sagittis sollicitudin, diam neque suscipit urna, quis aliquam tortor est sed risus. Aliquam vitae pretium diam. Quisque faucibus ac nulla quis faucibus. Vestibulum dictum condimentum rutrum.</p>
 
 </article>
-    </main>   
-    <aside class="sidebar">
-      <section class="tags">
-        <p>a lot of tags</p>
-      </section>
-      <section class="me">
-        <p>Hi! Me name is João Melo. I write because... You can find me in Twitter, GitHub and LinkedIn</p>
-      </section>
-    </aside> 
-  </div>
-</body> 
+      </main>
+      <footer>
+        <section class="mt-8 flex flex-wrap justify-center">
+          
+            
+  
+  <a href="/blog/tags/airtable/" class="font-semibold text-gray-700 rounded-full bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">airtable</a>
+
+          
+            
+  
+  <a href="/blog/tags/business/" class="font-semibold text-gray-700 rounded-full bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">business</a>
+
+          
+            
+  
+  <a href="/blog/tags/database/" class="font-semibold text-gray-700 rounded-full bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">database</a>
+
+          
+            
+  
+  <a href="/blog/tags/firebase/" class="font-semibold text-gray-700 rounded-full bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">firebase</a>
+
+          
+            
+  
+  <a href="/blog/tags/js/" class="font-semibold text-gray-700 rounded-full bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">js</a>
+
+          
+        </section>
+        <section class="mt-8">
+          <p class="text-justify text-sm">Hi! Me name is João Melo. I am an enthusiast of how leadership and technology combine to create amazing things together 🤓. I decided to blog about it as I learn what I can. You can get updates from 
+  <a href="https://twitter.com/joaomeloplus" target="_blank" class="font-semibold text-gray-700 rounded-full hover:text-green-400">Twitter</a>
+or
+  <a href="https://www.linkedin.com/in/joaomelo81/?locale=en_US" target="_blank" class="font-semibold text-gray-700 rounded-full hover:text-green-400">LinkedIn</a>
+, and also find me on 
+  <a href="https://github.com/joaomelo" target="_blank" class="font-semibold text-gray-700 rounded-full hover:text-green-400">GitHub</a>
+</p>
+        </section>
+      </footer>
+    </div>
+  </body>
 </html>

@@ -4,7 +4,7 @@
   "description": "my personal blog",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist/*",
+    "clean": "rimraf docs/*",
     "start": "npm run clean && eleventy --serve",
     "build": "npm run clean && eleventy",
     "commit": "git add -A && git commit",
@@ -28,5 +28,6 @@
     "@11ty/eleventy": "^0.11.0",
     "moment": "^2.25.3",
     "rimraf": "^3.0.2"
-  }
+  },
+  "dependencies": {}
 }

@@ -1,0 +1,14 @@
+---
+layout: base-layout.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: /tags/{{ tag }}/
+---
+{% from 'post-list.njk' import postList %}
+
+<h1 class="text-center text-4xl font-semibold mb-4">{{ tag + ' posts' }}</h1>
+
+{% set posts = collections[ tag ] %}
+{{ postList(posts) }}

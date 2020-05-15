@@ -1,0 +1,10 @@
+{% set commonStyle = "font-semibold text-gray-700 rounded-full" %}
+
+{% macro link(text, href, target='_self') %}
+  <a href="{{ href | url }}" target="{{ target }}" class="{{ commonStyle }} hover:text-green-400">{{ text }}</a>
+{% endmacro %}
+
+{% macro tag(tag) %}
+  {% set tagUrl %}/tags/{{ tag }}/{% endset %}
+  <a href="{{ tagUrl | url }}" class="{{ commonStyle }} bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">{{ tag }}</a>
+{% endmacro %}

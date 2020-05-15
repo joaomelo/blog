@@ -1,9 +1,9 @@
 ---
 layout: post-layout.njk
 title: My Third Post
-subtitle: this is getting old
+abstract: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id ipsum et metus hendrerit gravida. Integer imperdiet turpis ut quam aliquam, efficitur mattis diam suscipit. Proin ultrices vel sapien in condimentum. Vestibulum elementum lectus vel nunc ultrices
 date: 2020-05-12
-tags: ['post']
+tags: ['post', 'business', 'js']
 ---
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla id ipsum et metus hendrerit gravida. Integer imperdiet turpis ut quam aliquam, efficitur mattis diam suscipit. Proin ultrices vel sapien in condimentum. Vestibulum elementum lectus vel nunc ultrices, a ornare quam viverra. Cras quis massa a mauris scelerisque egestas ac ac sapien. Pellentesque a volutpat ex. In fringilla mi sem, cursus ullamcorper enim imperdiet nec. Phasellus ultrices tempor erat, nec sagittis velit sagittis sed. Aenean ullamcorper neque non libero imperdiet commodo. In viverra ullamcorper porttitor. Aliquam a convallis ante, id faucibus nisi. Nullam nec nunc egestas, auctor est et, malesuada tellus. Etiam commodo turpis ac semper tempus. Vestibulum varius imperdiet urna.
 
