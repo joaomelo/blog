@@ -1,0 +1,20 @@
+---
+layout: base-layout.njk
+---
+{% from 'link.njk' import link, tag %}
+
+<div class="min-h-screen max-w-screen-sm mx-auto px-4 bg-white">
+  <header class="text-right">{{ link('home', '/') }}</header>
+  <main>
+    {{ content | safe }}
+  </main>
+  <footer>
+    <section class="mt-8 flex flex-wrap justify-center">
+      {% for tagText in collections.tagList %}
+        {{ tag(tagText) }}
+      {% endfor %}
+    </section>
+    <p class="mt-8 mx-8 p-4 text-justify font-mono border-dashed border-4 border-gray-700">Hi! Me name is João Melo. I am an enthusiast of how leadership and technology combine to create amazing things together 🤓. I decided to blog about it as I learn what I can. You can get updates from {{ link('Twitter','https://twitter.com/joaomeloplus', '_blank') }} or {{ link('LinkedIn','https://www.linkedin.com/in/joaomelo81/?locale=en_US', '_blank') }}, and also find me on {{ link('GitHub','https://github.com/joaomelo', '_blank') }}</p>
+    <br/>
+  </footer>
+</div>

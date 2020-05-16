@@ -1,10 +1,14 @@
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const moment = require('moment');
 moment.locale('en');
 
 module.exports = function (eleventyConfig) {
   // lets combine array data from multiple data source in the cascade
   eleventyConfig.setDataDeepMerge(true);
-  
+
+  // code highlight
+  eleventyConfig.addPlugin(syntaxHighlight);
+
   // filters
   eleventyConfig.addFilter('dateIso', date => {
     return moment.utc(date).toISOString();
