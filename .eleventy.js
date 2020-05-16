@@ -29,6 +29,9 @@ module.exports = function (eleventyConfig) {
     return Array.from(tagsSet).sort();
   });
 
+  // github cname
+  eleventyConfig.addPassthroughCopy("src/CNAME");
+
   return {
       dir: {
         input: "src",
