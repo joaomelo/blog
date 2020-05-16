@@ -30,7 +30,6 @@ module.exports = function (eleventyConfig) {
   });
 
   return {
-      pathPrefix: "/blog/",
       dir: {
         input: "src",
         layouts: "_layouts",
