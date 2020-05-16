@@ -7,8 +7,9 @@ pagination:
 permalink: /tags/{{ tag }}/
 ---
 {% from 'post-list.njk' import postList %}
+{% from 'page-title.njk' import pageTitle %}
 
-<h1 class="text-center text-4xl font-semibold mb-4">{{ tag + ' posts' }}</h1>
+{{ pageTitle(tag + ' posts') }}
 
 {% set posts = collections[ tag ] %}
 {{ postList(posts) }}

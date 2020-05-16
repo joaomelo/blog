@@ -6,5 +6,9 @@ pagination:
   reverse: true
   alias: posts
 ---
+{% from 'page-title.njk' import pageTitle %}
 {% from 'post-list.njk' import postList %}
+
+{{ pageTitle('latest posts') }}
+
 {{ postList(posts) }}

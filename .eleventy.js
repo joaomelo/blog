@@ -2,12 +2,15 @@ const moment = require('moment');
 moment.locale('en');
 
 module.exports = function (eleventyConfig) {
+  // lets combine array data from multiple data source in the cascade
+  eleventyConfig.setDataDeepMerge(true);
+  
   // filters
   eleventyConfig.addFilter('dateIso', date => {
-    return moment(date).toISOString();
+    return moment.utc(date).toISOString();
   });
   eleventyConfig.addFilter('dateReadable', date => {
-    return moment(date).format('LL'); // E.g. May 31, 2019
+    return moment.utc(date).format('LL'); // E.g. May 31, 2019
   });
 
   // collections
