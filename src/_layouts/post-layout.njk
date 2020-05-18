@@ -5,7 +5,7 @@ layout: page-layout.njk
 
 <article>
   {{ pageTitle(title) }}
-  <h2 class="text-xs text-center"><time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time></h2>
+  <p class="text-xs text-center"><time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time></p>
   <div class="mt-4 text-justify">
   {{ content | safe }}
   </div>

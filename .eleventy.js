@@ -1,13 +1,30 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+
+const markdownIt = require('markdown-it');
+const markdownItClass = require('@toycode/markdown-it-class');
+const mapping = {
+  h2: ['text-xl', 'font-semibold', 'capitalize', 'mt-3'],
+  p: ['mt-2'],
+  img: ['p-4', 'w-full'],
+};
+const md = markdownIt({ linkify: true, html: true });
+md.use(markdownItClass, mapping);
+
 const moment = require('moment');
 moment.locale('en');
 
 module.exports = function (eleventyConfig) {
+  // enable image copying
+  eleventyConfig.setTemplateFormats(["njk", "md", "gif"]);
+
   // lets combine array data from multiple data source in the cascade
   eleventyConfig.setDataDeepMerge(true);
 
   // code highlight
   eleventyConfig.addPlugin(syntaxHighlight);
+
+  // set classes for markdown
+  eleventyConfig.setLibrary('md', md);
 
   // filters
   eleventyConfig.addFilter('dateIso', date => {

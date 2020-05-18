@@ -27,6 +27,7 @@
   "devDependencies": {
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
+    "@toycode/markdown-it-class": "^1.2.4",
     "moment": "^2.25.3",
     "rimraf": "^3.0.2"
   },
