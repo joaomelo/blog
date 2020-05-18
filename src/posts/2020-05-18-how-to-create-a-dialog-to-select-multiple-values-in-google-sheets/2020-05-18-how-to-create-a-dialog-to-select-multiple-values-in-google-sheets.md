@@ -2,27 +2,26 @@
 tags: ['google apps script']
 title: How to Create a Dialog to Select Multiple Values in Google Sheets
 abstract: Learn how to leverage JavaScript to create dialogs able to select multiple values from other cells inside a Google spreadsheet.
-eleventyExcludeFromCollections: true
 --- 
-Spreadsheets are the probably the most ubiquitous digital tool in the offices around the world. Most of us have a love and hate relationship with them.
+Spreadsheets are probably the most ubiquitous digital tool in offices around the world. Most of us have a love and hate relationship with them.
 
-One of the things missed for a long tim in then is the ability to select multiples values for a cell. Someway to emulate one to many relationships between different sheets.
+One of the things i missed in then for a long time was the ability to select multiples values for a cell. A emulation of one to many relationships between different data so common in many apps.
 
-Since Google Sheets support scripting using Html and Javascript it is quite easy to implement that feature in a spreadsheet. 
+Since Google Sheets support scripting using Html and Javascript, it is quite easy to implement that feature in their spreadsheets. 
 
 ## Prepare The Data
 
-Let's create a simple example with people and team sheets. In this casa a person can be in more than one team.
+First we create a simple example with sheets for people and teams records. In this case, a person can be in more than one team.
 
-We populate the data in both sheets and a important detail, link the Data Validation option in the people sheet towards the teams value. This link will be used by our script later.
+Populate the data in both sheets and set the _Data validation_ option in the people sheet with the teams value range. This link will be vital to our script later.
 
 ![data preparation](data-preparation.gif)
 
 ## Script Initialization
 
-After that you can click in `Script Editor` submenu inside the `Tools` menu. After the script editor screen opens you click in `File`, then `New` and finally `Script file`. Name it `index`.
+Now click in the _Script Editor_ submenu inside the _Tools_ menu. After the script editor screen  opens, click in _File_, then _New_ and finally in _Script file_. You can name the file whatever you want, let us stick with _index_.
 
-The first step is to create a menu option inside the spreadsheet we can use to call our dialog. We do that by creating a `onOpen` function. This will be called automatically.
+Write some code to create a menu option inside the spreadsheet that we can use to call our future dialog. We do that by creating a _onOpen_ function. The name is noted by the spreadsheet and called automatically.
 
 ``` js
 function onOpen() {
@@ -35,13 +34,13 @@ function onOpen() {
 }
 ```
 
-After saving the script, you can reload the spreadsheet window and the `My Script` menu should already be available.
+After saving the script, you need to reload the spreadsheet window. After that the _My Script_ menu should be available.
 
-## Apps Scripts Dialog
+## Hello World Dialog
 
-The Apps Scripts technology offers a Html service that can render custom dialog and sidebars on top of google apps. We leverage standard html, css and javascript together with google Api to create custom behavior in google spreadsheets for example.
+The Apps Scripts technology offers a Html service that can render custom dialogs and sidebars on top of Google office apps. This is great because we can leverage standard Html, CSS and JavaScript together with the Google Api to create a new layer of features above google spreadsheets for example.
 
-Let's create a html file named `dialog` in the scripts editor to start exploring this feature. Paste the code bellow in the new file.
+Let's create a Html file named _dialog_ in the scripts editor to start exploring this feature. By pasting the code bellow in the _dialog_ file we have a basic custom dialog, but no JavaScript to invoke it.
 
 ``` html
 <!DOCTYPE html>
@@ -57,7 +56,7 @@ Let's create a html file named `dialog` in the scripts editor to start exploring
 </html>
 ```
 
-Now to call a dialog with this html we go back to our `index` file and add the `showSelectDialog` function with the code bellow. You can see the code hints to a template engine capability inside Apps Script. This will be useful to us later.  
+To call the dialog, you need to go back go back to our _index_ file and create a _showSelectDialog_ function. You can see that the function code bellow hints to a template engine capability. This will be very useful to us in a few moments.  
 
 ``` js
 function showSelectDialog(){
@@ -69,18 +68,20 @@ function showSelectDialog(){
 }
 ```
 
-You should now be seeing a basic dialog when clicking in `Select multiple`. Google Sheets maybe ask you for authorization to run the script. This could happen more then one time during this project. You can say ok and go. 
+If you click in the _Select multiple_ menu our Hello World dialog should appear. Google Sheets maybe ask you for an authorization to run the script. This could happen more then once during this project. Make sure everything sounds safe and click ok. 
 
-The first challenge we have is how to show all teams options the user can select and if some are already present in the cell, present then already selected. So let's write another function inside `index` that grab the validation data for a cell as the database for available options and mark those already selected. See:
+The challenge now is settle how to show all teams as options for the user to select in the dialog. We can also create a mechanism to check if some teams are already present in the cell show those ones selected in the dialog. 
+
+So write another function inside _index_ that uses the validation data for a cell as a database for available options. The function could also check if any of the options are already present in the cell and mark those already as selected. Happily, Apps Scripts Api do most of the heavy lifting for us. See the function.
 
 ``` js
 function getOptionsFromCurrentCell(){
   const validOptions = SpreadsheetApp
-    .getActiveRange()
-    .getDataValidation()
-    .getCriteriaValues()[0]
-    .getValues()
-    .map(value => value[0]);
+    .getActiveRange() // everything that is selected
+    .getDataValidation() // all validation rules for that
+    .getCriteriaValues()[0] // the first criteria
+    .getValues() // the value for this criteria
+    .map(value => value[0]); // flatten in an one dimension array
 
   const cellData = SpreadsheetApp
     .getActiveRange()
@@ -206,5 +207,5 @@ By now our dialog should be working just fine even if not so elegant designed.
 
 We can improve upon that by styling the dialog and creating a better UI. You will see that if click in the menu in a cell without validation criteria we get a exception. We also could deal better with the asynchronous aspects. But i will leave that outside the scope of this post.
 
-Finally, you can find the full code mentioned here in this GitHub repository.
+Finally, you can find the full code for this post in this (GitHub repository)[https://github.com/joaomelo/dialog-to-select-multiple-values-in-google-sheets].
 

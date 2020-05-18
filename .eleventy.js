@@ -5,6 +5,7 @@ const markdownItClass = require('@toycode/markdown-it-class');
 const mapping = {
   h2: ['text-xl', 'font-semibold', 'capitalize', 'mt-3'],
   p: ['mt-2'],
+  em: ['text-xs', 'bg-gray-300', 'font-mono', 'py-1', 'px-2', 'rounded-sm', 'not-italic'],
   img: ['p-4', 'w-full'],
 };
 const md = markdownIt({ linkify: true, html: true });
