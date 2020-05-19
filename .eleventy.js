@@ -3,9 +3,10 @@ const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 const markdownIt = require('markdown-it');
 const markdownItClass = require('@toycode/markdown-it-class');
 const mapping = {
-  h2: ['text-xl', 'font-semibold', 'capitalize', 'mt-3'],
-  p: ['mt-2'],
-  em: ['text-xs', 'bg-gray-300', 'font-mono', 'py-1', 'px-2', 'rounded-sm', 'not-italic'],
+  h2: ['text-xl', 'font-semibold', 'capitalize', 'mt-4'],
+  p: ['mt-3'],
+  a: ['font-semibold', 'text-gray-700', 'hover:text-green-400'],
+  em: ['text-xs', 'bg-gray-200', 'font-mono', 'py-1', 'px-2', 'rounded-sm', 'not-italic'],
   img: ['p-4', 'w-full'],
 };
 const md = markdownIt({ linkify: true, html: true });
