@@ -9,7 +9,8 @@
     "build": "npm run clean && eleventy",
     "commit": "git add -A && git commit",
     "push": "git push && git push --tags",
-    "release": "npm run build && npm run commit && npm version patch && npm run push"
+    "release:patch": "npm run build && npm run commit && npm version patch && npm run push",
+    "release:minor": "npm run build && npm run commit && npm version minor && npm run push"
   },
   "repository": {
     "type": "git",
