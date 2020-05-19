@@ -263,4 +263,4 @@ By now our program should be working just fine, even if not very visually elegan
 
 We can improve upon what we did until here by styling the dialog and creating better UI feedback. You will see that if we select the menu while in a cell without validation criteria, the user will get a confusing exception message. We also could deal better with the asynchronous aspects. But I will leave that outside the scope of this post. Maybe you can give some suggestions in the GitHub repository.
 
-Talking about that, you can find the full code for this project in this (GitHub repository)[https://github.com/joaomelo/dialog-to-select-multiple-values-in-google-sheets].
+Talking about that, you can find the full code for this project in this [GitHub repository](https://github.com/joaomelo/dialog-to-select-multiple-values-in-google-sheets).
