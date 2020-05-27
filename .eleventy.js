@@ -8,6 +8,7 @@ const mapping = {
   a: ['font-semibold', 'text-gray-700', 'hover:text-green-400'],
   em: ['text-xs', 'bg-gray-200', 'font-mono', 'py-1', 'px-2', 'rounded-sm', 'not-italic'],
   img: ['p-4', 'w-full'],
+  ul: ['list-disc', 'list-inside']
 };
 const md = markdownIt({ linkify: true, html: true });
 md.use(markdownItClass, mapping);
