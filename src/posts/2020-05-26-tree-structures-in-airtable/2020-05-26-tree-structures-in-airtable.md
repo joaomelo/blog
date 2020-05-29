@@ -5,7 +5,7 @@ abstract: How to arrange Airtable's records in tree structures building an app t
 --- 
 [Airtable](https://airtable.com/) is a powerful tool. It has tons of features to edit and visualize data. I use it to organize many of my personal workflows. It is also an amazing prototyping mechanism to test ideas before starting a new app.
 
-The inability to create tree structures with the table's records is one of my small frustrations with it. As you can see in the next image, although Airtable is perfectly able to link records in the same table, one cannot order them properly without a way to fill a path string for every item.
+The inability to create tree structures with table's records is one of my small frustrations with it. As you can see in the next image, although Airtable is perfectly able to link records in the same table, one cannot order them properly without a way to fill a path string for every item.
 
 ![unable to create a tree in airtable](./tree-unable-in-airtable.gif)
 
@@ -19,9 +19,9 @@ We will use vanilla Html and JavaScript for our project with the help of some pa
 
 Since we are already talking about packages, don't worry if you are not familiar with Tailwind. It is a CSS framework with an [utility first](https://tailwindcss.com/docs/utility-first/) mentality. You don't need to learn anything about it for our exercise here. Keep calm and carry on aware that a lot of classes will appear in the Html.
 
-I wrote the code in this post using [Visual Studio Code](https://code.visualstudio.com/) serving files with the [Live Server](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer) extension. 
+If you find yourself lost at any point have no worry. You can go to [this](https://github.com/joaomelo/tree-structures-in-airtable) repository and download the full app. I versioned it in different folders corresponding to each post milestone. 
 
-If you find yourself lost at any point have no worry. You can go to (this)[https://github.com/joaomelo/tree-structures-in-airtable] repository and download the full app. I versioned it in different folders corresponding to each post milestone. But enough of talking, let's code. We start with a skeleton _index.html_ just pulling the third party packages and our own future script file that will be created in a moment.
+But enough of talking, let's code. We start with a skeleton _index.html_ just pulling the third party packages and our own future script file that will be created in a moment.
 
 ``` html
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ If you open _index.html_ in the local server of your choice, you will see our ba
 
 ## Basic UI
 
-Airtable API needs three basic information: your personal API key, the base id where the given table is located, and the table name. So we need to create some inputs to ask that from the user, a button to run our script and a message area to provide feedback. We can update the code inside the _main_ tag of our _index.html_ with the code below.
+Airtable API needs three basic information: your personal API key, the base id where the given table is located, and the table name. We need to create some inputs to ask that from the user, a button to run our script and a message area to provide feedback. We can update the code inside the _main_ tag of our _index.html_ with the code below.
 
 ``` html
 <main id="app">
@@ -151,7 +151,7 @@ function run() {
 }
 ```
 
-Inside _loadRecords_ we use the _select_ method from the _Table_ object to create a _query_ object. The query has an _eachPage_ method that paginates through all records in a table applying a provided callback function and returning a Promise at the end. Let's put that design to action to fill an array with records.
+Inside _loadRecords_, we use the _select_ method from the _Table_ object to create a _query_ object. The query has an _eachPage_ method that paginates through all records in a table applying a provided callback function and returning a Promise at the end. Let's put that design to action to fill an array with records.
 
 ``` js
 function loadRecords(table) {
@@ -166,7 +166,7 @@ function loadRecords(table) {
 }
 ```
 
-Yeah! The app can load records from Airtable. It should look like the gif below.
+Yeah! The app can load data from Airtable. It should look like the gif below.
 
 ![app now loads records](load-records.gif)
 
@@ -181,7 +181,7 @@ The easiest case comes from records that don't have a parent. In these cases, we
 ``` js
 function calcPath(record, records) {
   const findParent = child => child.fields.parent
-    ? records.find(record => record.id === child.fields.parent[0])
+    ? records.find(r => r.id === child.fields.parent[0])
     : null;
 
   let path = record.fields.name;
@@ -274,7 +274,7 @@ I think everything is patched. Test the workflow and check if every record has a
 
 ## Final Thoughts
 
-There is a ton of stuff that could be improved here. I didn't deal with user invalid input or catch any exception from API calls select for example. I am leaving these next steps for your brave soul.
+There is a ton of stuff that could be improved here. I didn't deal with user invalid inputs or catch any exception from API calls for example. I am leaving these next steps for your brave soul.
 
 If you are interested, I created for myself a web app to run this kind of path update with more options like configurable field names or the ability to inject a status emoji in the path to better order records. The app also creates recursive tasks. It is open-sourced in this GitHub [repository](https://github.com/joaomelo/mytable) and free to use in a very uncommitted way at [mytable.melo.plus](https://mytable.melo.plus).
 
