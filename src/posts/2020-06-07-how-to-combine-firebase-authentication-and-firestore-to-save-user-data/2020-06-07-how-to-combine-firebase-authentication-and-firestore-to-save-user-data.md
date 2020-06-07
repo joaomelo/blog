@@ -1,20 +1,20 @@
 --- 
-tags: ['firebase', 'firestore', 'authentication']
+tags: ['firebase', 'auth']
 title: How To Combine Firebase Authentication And Firestore To Save User Data
-abstract: ...
+abstract: A guide about using Firestore documents to extend the management of user profile data beyond the fixed set of properties offered by Firebase Authentication.
 --- 
 
-[Firebase](https://firebase.google.com/) is a boost of agility to solo developers and small teams. One of its main conveniences is the authentication service. But after a few times building login UI with Firebase Authentication (Fireauth), I found myself repeating code to wrap or complement its features. One of such cases is the need to combine user data from Fireauth with another dataset.
+[Firebase](https://firebase.google.com/) is a boost of agility to solo developers and small teams. One of its main conveniences is the authentication service. But after a few times building login UI with Firebase Authentication (Fireauth), I found myself repeating code to wrap or complement its features. One of such cases is the need to combine user data from Fireauth with another database.
 
-Fireauth can hold some profile user data but they are limited to a [fixed set of basic properties](https://firebase.google.com/docs/auth/users#user_properties) if you want more you need another database solution. Firestore is a natural option since its part of the same suite and is by itself a great database solution.
+Fireauth can hold some profile user data, but they are limited to a ["fixed set of basic properties"](https://firebase.google.com/docs/auth/users#user_properties). If you want more, you need a database solution. Firestore is part of the same suite and is, by its own merits, an excellent product.
 
-But now we introduced the friction to handle two dataset in our app. Is important to develop a sensible approach ro read and write user data so we the rest of app can be blind to this complexity and only see a user with lots of information available to read and a simple write API. Let's do it.
+But now we introduced the friction to handle two datasets in our app. It is essential to encapsulate the approach to read and write user data in that scenario, so the rest of the app can be blind to this complexity and only see a user with lots of information available to read and simple to extend. Let's do it.
 
-## Just Fireauth
+## Storing Fireauth Fresh User Information
 
-We could imagine ourselves working on a `auth.js` module inside a bigger web app. Inside our module we need to export a interface, so the rest of the app can access the user information we fuse between Fireauth and Firestore. 
+Picture ourselves working on an _auth.js_ module inside a bigger web app. In that module, we need to export an interface to the rest of the app, so it can access the user information we fuse between Fireauth and Firestore. 
 
-We could start by exporting a simple object with status and user data. Like this.
+We could start by exporting a simple object that will work as a data store.
 
 ``` js
 // auth.js
@@ -25,7 +25,7 @@ const authState = {
 export { authState };
 ```
 
-We could then import the Firebase Auth object initialized somewhere else and update the authState still with only Fireauth user data. We do that by passing a observer function to the `onAuthStateChanged` method of the imported `fireauth` object. Like so.
+Then, we import the Fireauth object initialized somewhere else in the app and update _authState_ still with only Fireauth data. That is done by passing an observer function to the _onAuthStateChanged_ method of the imported _fireauth_ object. Check the code below.
 
 ``` js
 import { fireauth } from './init-firebase.js'
@@ -36,29 +36,24 @@ const authState = {
 
 fireauth.onAuthStateChanged(user => {
   authState.userData = user
-    ? {
-        id: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL
-      }
+    ? { id: user.uid, email: user.email }
     : null; // user has signed out
 });
 
 export { authState };
 ```
 
-Rigth now anyone that import `authState` will receive the must updated data at the moment of the import is interpreted. Which is kinda not so coll.
+Anyone who imports _authState_ will receive the most updated data at the moment the import statement is interpreted. Which is very uncool 😳.
 
 ## Notifying State Change
 
-The problem here is that many auth dependent situation would some sort of event signal to now that the auth state changed. Like a routing system that will react to a user signing in to show the home page a fill a welcome message with the user email.
+Most auth dependent features need to be signaled when auth state changes. A routing system will react to a user signing in by showing the home page with a logout button labeled using the user email.
 
-We can leverage events libraries to help us on that. [Rxjs](https://rxjs-dev.firebaseapp.com/) is the golden standard and you should check on that for sure. To make things simple i will use a [small library](https://github.com/joaomelo/bus) i wrote that exports general `subscribe` and `publish` functions. 
+We can leverage event libraries to help us with that. [Rxjs](https://rxjs-dev.firebaseapp.com/) is the gold standard, make sure you check on that. To make things simpler, let's use a [small library](https://github.com/joaomelo/bus) I wrote. It exports two generics _subscribe_ and _publish_ functions. 
 
-Subscribe allow the rest o the app pass observer functions associated to a event name. Every time other place on the someone call publish with that event name, all observers functions will be called with the parameters passed to publish.
+The _subscribe_ function allows registering observer functions associated with an event name. Every time the _publish_ function is called with that event name, all associated observer functions will be called with the passed payload as an argument.
 
-The code bellow give the option to import the state store directly or subscribe to upates and always receive the last user data.
+The code below improves our auth module, raising the ability to subscribe to auth state changes and always receive the latest user data.
  
 ``` js
 // auth.js
@@ -71,16 +66,11 @@ const authState = {
 
 fireauth.onAuthStateChanged(user => {
   authState.userData = user
-    ? {
-        id: user.uid,
-        email: user.email,
-        displayName: user.displayName,
-        photoURL: user.photoURL
-      }
-    : null; // user has signed out
+    ? { id: user.uid, email: user.email }
+    : null;
       
-  // the spread operator avoid direct reference
-  // the state object
+  // the spread operator avoids direct reference
+  // to the state object
   publish('AUTH_STATE_CHANGED', { ...authState });
 });
 
@@ -88,14 +78,15 @@ export { authState };
 
 // some-place-else.js
 import { subscribe } from '@joaomelo/bus'
-subscribe('AUTH_STATE_CHANGED', authState => concole.log(authState));
+subscribe('AUTH_STATE_CHANGED', 
+  authState => console.log(authState));
 ```
 
-But Firestore integration is still lacking.
+That's better 👌, now we can work on the lacking Firestore integration.
 
 ## Reading Firestore Data
 
-We will save a document for every user in a Firestore `profiles` collection. Firestore also offers a subscriber function to observe data changes direct in a document. We can use the user id as the same id in the document and advance our auth module.
+In Firestore, we will have a `profiles` collection with a document for every user. The user id will be the tie between a user in Fireauth and the collection's record. For our great happiness 🙏, Firestore offers a function to observe data changes directly from this profile document. The following code implements that approach.
 
 ``` js
 // auth.js
@@ -113,27 +104,26 @@ fireauth.onAuthStateChanged(user => {
     return;
   }
 
-  const fireauthData = {
-    id: user.uid,
-    email: user.email,
-    displayName: user.displayName,
-    photoURL: user.photoURL
-  }
-
+  // we must be carefull
   // maybe this doc does not exists yet
   const docRef = firestore
     .collection('profiles')
     .doc(user.uid);
 
   docRef
-    // 'set' secures doc creation without affecting any data
+    // 'set' secures doc creation without 
+    // affecting any preexisting data
     .set({}, { merge: true }) 
     .then(() => { 
-      this.config.fuse.docRef.onSnapshot(doc => {
+      docRef.onSnapshot(doc => {
+        // the first data load
+        // and subsequent updates
+        // will trigger this
         authState.userData = {
-          ...fireauthData,
+          id: user.uid, 
+          email: user.email,
           ...doc.data()
-        }
+        };
         publish('AUTH_STATE_CHANGED', { ...authState });
       });
     });  
@@ -142,35 +132,40 @@ fireauth.onAuthStateChanged(user => {
 export { authState };
 ```
 
-But what of we need to update that?
+That's fancy 💃 stuff. But what if we need to update that user profile?
 
 ## Updating User Data
 
-We could export a updateUserData function that receives the user id and a series of properties and go with the proper updates using Firestore.
+To update user data stored in Firestore, we could create and export a _updateUserData_ function that receives the properties values inside a _props_ parameter. See.
 
 ``` js
 // auth.js
-// ...
 
-function updateUserData(props){
+// ... all the code until now
+
+function updateUserData(props) {
   const docRef = firestore
     .collection('profiles')
     .doc(authState.userData.id);
 
   // set will return a promise that resolves after
-  //the update is complete
+  // the update is complete
   return docRef.set(props, { merge: true });
 }
 
 export { authState, updateUserData };
 ```
 
-That simple :). Now we have a central place for the whole app to listen to auth state change and also update user profile information.
+So simple, I love it 🥰. 
+
+Now we have a module the whole app can use to listen to auth state changes and also freely update user profile information.
 
 ## Wrapping Up
 
-You must be aware that we did not do any sort of data checking and is very dangerous in a production app. Also know that Firestore data need [security rules](https://firebase.google.com/docs/firestore/security/get-started) to funnel who and how data could be read and updated.
+Some things were left out. You must have already realized that we did not check any data. That would be very dangerous in a production app. Also, know that Firestore needs properly [Security Rules](https://firebase.google.com/docs/firestore/security/get-started) to funnel down who and how data could be read and updated.
 
-If you are interested, I created an library that deal with that data merging between Fireauth and Firestore data and other goodies. It is open-sourced in this GitHub [repository](https://github.com/joaomelo/auth-mech/blob/master/lib/src/auth-mech.js).
+We could also create a status property in _authState_ to better signal what event happened. 
 
-Goodbye and stay health.
+If you are interested, I created a library that deals with that merging between Fireauth and Firestore data and other goodies. It is open-sourced in this GitHub [repository](https://github.com/joaomelo/auth-mech/blob/master/lib/src/auth-mech.js) and available as a npm [package](https://www.npmjs.com/package/@joaomelo/auth-mech).
+
+Goodbye, and stay healthy 😷.
