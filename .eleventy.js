@@ -51,6 +51,7 @@ module.exports = function (eleventyConfig) {
 
   // github cname
   eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy("src/admin");
 
   return {
       dir: {
