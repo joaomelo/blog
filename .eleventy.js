@@ -18,7 +18,7 @@ moment.locale('en');
 
 module.exports = function (eleventyConfig) {
   // enable image copying
-  eleventyConfig.setTemplateFormats(["njk", "md", "gif"]);
+  eleventyConfig.setTemplateFormats(["njk", "md", "gif", "css"]);
 
   // lets combine array data from multiple data source in the cascade
   eleventyConfig.setDataDeepMerge(true);
