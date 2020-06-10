@@ -37,18 +37,10 @@ module.exports = function (eleventyConfig) {
     return moment.utc(date).format('LL'); // E.g. May 31, 2019
   });
 
-  // collections
-  eleventyConfig.addCollection("tagList", collection => {
-    const tagsSet = new Set();
-    collection.getAll().forEach(item => {
-      if (!item.data.tags) return;
-      item.data.tags
-        .filter(tag => !['post', 'all'].includes(tag))
-        .forEach(tag => tagsSet.add(tag));
-    });
-    return Array.from(tagsSet).sort();
-  });
-
+  // tags
+  const createTagList = require('./config/tags');
+  createTagList(eleventyConfig);
+  
   // github cname
   eleventyConfig.addPassthroughCopy("src/CNAME");
 

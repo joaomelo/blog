@@ -1,5 +1,5 @@
 --- 
-tags: ['google apps script']
+tags: ['featured', 'google apps script']
 title: Multi-value Dialogs in Google Sheets
 abstract: How to create dialogs to select multiple values for single cells in Google Sheets using Html and JavaScript.
 --- 

@@ -1,14 +1,14 @@
 ---
 layout: page-layout.njk
 pagination:
-  data: collections.post
+  data: collections.featured
   size: 10
   reverse: true
-  alias: posts
+  alias: featured
 ---
 {% from 'page-title.njk' import pageTitle %}
 {% from 'post-list.njk' import postList %}
 
-{{ pageTitle('latest posts') }}
+{{ pageTitle('featured posts') }}
 
-{{ postList(posts) }}
+{{ postList(featured) }}
