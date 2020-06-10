@@ -1,0 +1,12 @@
+---
+layout: page-layout.njk
+pagination:
+  data: collections.draft
+  size: 10
+  alias: drafts
+---
+{% from 'post-list.njk' import postList %}
+{% from 'page-title.njk' import pageTitle %}
+
+{{ pageTitle('drafts') }}
+{{ postList(drafts) }}
