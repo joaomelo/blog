@@ -9,6 +9,7 @@ sections:
   label: posts
   create: all
   match: "**/*"
+  exclude: "*.json"
 upload_dir: src/media
 public_path: "/media"
 front_matter_path: ''
