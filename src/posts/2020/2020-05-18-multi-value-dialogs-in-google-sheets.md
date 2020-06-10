@@ -15,7 +15,7 @@ First, we create a simple example with datasheets for people and team records. I
 
 Populate the data in both sheets and set the _Data validation_ option in the people sheet for the teams' value range. This link will be crucial to our script later.
 
-![data preparation](data-preparation.gif)
+![data preparation](/media/2020-05-18-data-preparation.gif)
 
 ## Raising a Menu in The Spreadsheet
 
@@ -259,7 +259,7 @@ You can can see in the _apply_ function that we called _setOptionsForCurrentCell
 
 By now our program should be working just fine, even if not very visually elegant.
 
-![dialog is now working](dialog-working.gif)
+![dialog is now working](/media/2020-05-18-dialog-working.gif)
 
 We can improve upon what we did until here by styling the dialog and creating better UI feedback. You will see that if we select the menu while in a cell without validation criteria, the user will get a confusing exception message. We also could deal better with the asynchronous aspects. But I will leave that outside the scope of this post. Maybe you can give some suggestions in the GitHub repository.
 

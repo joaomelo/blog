@@ -7,7 +7,7 @@ abstract: How to arrange Airtable's records in tree structures building an app t
 
 The inability to create tree structures with table's records is one of my small frustrations with it. As you can see in the next image, although Airtable is perfectly able to link records in the same table, one cannot order them properly without a way to fill a path string for every item.
 
-![unable to create a tree in airtable](./tree-unable-in-airtable.gif)
+![unable to create a tree in airtable](/media/2020-05-28-tree-unable-in-airtable.gif)
 
 The good news is that Airtable offers an API. So, we can set our path field with the power of JavaScript and a couple of libraries. Let me share in this post a way to accomplish that.
 
@@ -168,7 +168,7 @@ function loadRecords(table) {
 
 Yeah! The app can load data from Airtable. It should look like the gif below.
 
-![app now loads records](load-records.gif)
+![app now loads records](/media/2020-05-28-load-records.gif)
 
 Don't you love 🥰 coding?! But we should not get ahead of ourselves. We still need to update that damn path field.
 
@@ -270,7 +270,7 @@ function updateRecord(table, id, entries) {
 
 I think everything is patched. Test the workflow and check if every record has a shining updated path text field.
 
-![update running smoothly](path-updating.gif)
+![update running smoothly](/media/2020-05-28-path-updating.gif)
 
 ## Final Thoughts
 
