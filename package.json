@@ -6,11 +6,7 @@
   "scripts": {
     "clean": "rimraf docs/*",
     "start": "npm run clean && eleventy --serve",
-    "build": "npm run clean && eleventy",
-    "commit": "git add -A && git commit",
-    "push": "git push && git push --tags",
-    "release:patch": "npm run build && npm run commit && npm version patch && npm run push",
-    "release:minor": "npm run build && npm run commit && npm version minor && npm run push"
+    "build": "npm run clean && eleventy"
   },
   "repository": {
     "type": "git",
