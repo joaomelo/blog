@@ -1,0 +1,15 @@
+---
+layout: page-layout.njk
+title: Page Not Found
+permalink: /404.html
+---
+{% from 'page-title.njk' import pageTitle %}
+
+<div>
+  {{ pageTitle(title) }}
+  <img 
+    src="/404.png" 
+    alt="Page Not Found"
+    class="post-image"
+  >
+</div>
