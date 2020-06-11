@@ -17,8 +17,7 @@ const moment = require('moment');
 moment.locale('en');
 
 module.exports = function (eleventyConfig) {
-  // enable image copying
-  eleventyConfig.setTemplateFormats(["njk", "md", "gif", "css"]);
+
 
   // lets combine array data from multiple data source in the cascade
   eleventyConfig.setDataDeepMerge(true);
@@ -41,8 +40,9 @@ module.exports = function (eleventyConfig) {
   const createTagList = require('./config/tags');
   createTagList(eleventyConfig);
   
-  // github cname
-  eleventyConfig.addPassthroughCopy("src/CNAME");
+  // files movement configurations
+  const configFiles = require('./config/files');
+  configFiles(eleventyConfig);  
 
   return {
       dir: {

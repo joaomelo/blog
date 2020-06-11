@@ -1,0 +1,78 @@
+:root {
+  --primary: #1A535C;
+  --secondary: #4ECDC4;
+  --bg-color: white;
+  --accent-danger: #FF6B6B;
+  --accent-warn: #FFE66D;
+  --font-heading: 'Roboto', sans-serif;
+  --font-text: 'Noto Sans JP', sans-serif;
+  --border: 2px dashed var(--accent-danger);
+}
+
+* {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: var(--bg-color);
+  font: medium var(--font-text);
+}
+
+header {
+  text-align: right;
+  padding: 8px;
+  border-bottom: var(--border);
+}
+
+.container {
+  max-width: 600px;
+  margin: 16px auto 0px;
+  padding: 0px 32px;
+}
+
+footer {
+  margin: 32px 0px;
+}
+
+.tags {
+  display: flex;
+  justify-content: center;
+}
+
+.about {
+  margin: 32px;
+  padding: 16px;
+  text-align: justify;
+  border: var(--border);
+}
+
+.license {
+  text-align: center;
+  font-size: small;  
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font: large var(--font-heading);
+  color: var(--primary);
+}
+
+h1 {
+  font-size: xx-large;
+}
+
+h2 {
+  font-size: x-large;
+}
+
+a, a:visited {
+  border-radius: 25px;
+  text-decoration: none;
+  color: var(--primary);
+}
+
+a:hover, a:active {
+  color: var(--accent-danger);
+}
+
