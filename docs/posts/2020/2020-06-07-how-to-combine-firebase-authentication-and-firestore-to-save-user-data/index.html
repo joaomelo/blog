@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128497960-2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+    
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128497960-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-      gtag('config', 'UA-128497960-2');
-    </script>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
+        gtag('config', 'UA-128497960-2');
+      </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
+      
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -24,7 +26,10 @@
     
 
     <header>
-      <h1><a href="/" target="_self">melo.plus</a></h1>
+      <h1>
+        <a href="/" target="_self">melo.plus</a> 
+          
+      </h1>
     </header>
 
     <div class="container">
@@ -35,7 +40,7 @@
   
   <h1 class="page-title">How To Combine Firebase Authentication And Firestore To Save User Data</h1>
 
-  <p class="post-date"><time datetime="2020-06-07T00:00:00.000Z">June 7, 2020</time></p>
+  <p class="post-date"><time datetime="2020-06-07T03:00:00.000Z">June 7, 2020</time></p>
   <article class="post-content">
     <p class="post-paragraph"><a href="https://firebase.google.com/">Firebase</a> is a boost of agility to solo developers and small teams. One of its main conveniences is the authentication service. But after a few times building login UI with Firebase Authentication (Fireauth), I found myself repeating code to wrap or complement its features. One of such cases is the need to combine user data from Fireauth with another database.</p>
 <p class="post-paragraph">Fireauth can hold some profile user data, but they are limited to a <a href="https://firebase.google.com/docs/auth/users#user%60properties">&quot;fixed set of basic properties&quot;</a>. If you want more, you need a database solution. Firestore is part of the same suite and is, by its own merits, an excellent product.</p>

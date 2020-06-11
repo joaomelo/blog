@@ -6,7 +6,10 @@
   "scripts": {
     "clean": "rimraf docs/*",
     "start": "npm run clean && cross-env ELEVENTY_ENV=dev eleventy --serve",
-    "build": "npm run clean && cross-env ELEVENTY_ENV=prod eleventy"
+    "build": "npm run clean && cross-env ELEVENTY_ENV=prod eleventy",
+    "commit": "git add -A && git commit",
+    "push": "git push && git push --tags",
+    "publish": "npm run build && npm run commit && npm version patch && npm run push"
   },
   "repository": {
     "type": "git",
