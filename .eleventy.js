@@ -1,41 +1,19 @@
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-
-const markdownIt = require('markdown-it');
-const markdownItClass = require('@toycode/markdown-it-class');
-const mapping = {
-  h2: ['text-xl', 'font-semibold', 'capitalize', 'mt-4'],
-  p: ['mt-3'],
-  a: ['font-semibold', 'text-gray-700', 'hover:text-green-400'],
-  em: ['text-xs', 'bg-gray-200', 'font-mono', 'py-1', 'px-2', 'rounded-sm', 'not-italic'],
-  img: ['p-4', 'w-full'],
-  ul: ['list-disc', 'list-inside']
-};
-const md = markdownIt({ linkify: true, html: true });
-md.use(markdownItClass, mapping);
-
-const moment = require('moment');
-moment.locale('en');
-
 module.exports = function (eleventyConfig) {
-
-
   // lets combine array data from multiple data source in the cascade
   eleventyConfig.setDataDeepMerge(true);
 
   // code highlight
+  const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
   eleventyConfig.addPlugin(syntaxHighlight);
 
   // set classes for markdown
-  eleventyConfig.setLibrary('md', md);
+  const setupMarkdown = require('./config/markdown');
+  setupMarkdown(eleventyConfig);
 
-  // filters
-  eleventyConfig.addFilter('dateIso', date => {
-    return moment.utc(date).toISOString();
-  });
-  eleventyConfig.addFilter('dateReadable', date => {
-    return moment.utc(date).format('LL'); // E.g. May 31, 2019
-  });
-
+  // add date filters
+  const setDateFilters = require('./config/dates-filters');
+  setDateFilters(eleventyConfig);
+  
   // tags
   const createTagList = require('./config/tags');
   createTagList(eleventyConfig);

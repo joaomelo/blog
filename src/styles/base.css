@@ -1,9 +1,8 @@
 :root {
+  --bg-color: #FFFFFF;
   --primary: #1A535C;
-  --secondary: #4ECDC4;
-  --bg-color: white;
-  --accent-danger: #FF6B6B;
-  --accent-warn: #FFE66D;
+  --secondary: #DEF7F5;
+  --accent: #FF6B6B;
   --font-heading: 'Roboto', sans-serif;
   --font-text: 'Noto Sans JP', sans-serif;
   --border: 4px dashed var(--primary);
@@ -27,7 +26,7 @@ header {
 }
 
 .container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 16px auto 0px;
   padding: 0px 32px;
 }
@@ -73,30 +72,23 @@ a, a:visited {
 }
 
 a:hover, a:active {
-  color: var(--accent-danger);
+  color: var(--accent);
 }
 
-.tag, .tag:visited {
+.content-tag, .content-tag:visited {
   background-color: var(--secondary);
   color: var(--primary);
   padding: 1px 8px;
   margin: 0px 2px;
 }
 
-.tag:hover, .tag:active {
-  background-color: var(--accent-danger);
+.content-tag:hover, .content-tag:active {
+  background-color: var(--accent);
   color: var(--bg-color);
 }
 
 .page-title {
   text-align: center;
   text-transform: capitalize;
-}
-
-.post-list-item {
-  margin-top: 32px;
-}
-
-.post-list-item-abstract {
-  text-align: justify;
+  margin: 32px 0px 0px;
 }

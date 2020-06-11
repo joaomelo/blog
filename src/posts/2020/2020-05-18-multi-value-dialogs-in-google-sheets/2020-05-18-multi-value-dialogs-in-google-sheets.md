@@ -13,15 +13,15 @@ Since Google Sheets support scripting using Html and JavaScript, it is quite acc
 
 First, we create a simple example with datasheets for people and team records. In our case, a person can be part of more than one team.
 
-Populate the data in both sheets and set the _Data validation_ option in the people sheet for the teams' value range. This link will be crucial to our script later.
+Populate the data in both sheets and set the `Data validation` option in the people sheet for the teams' value range. This link will be crucial to our script later.
 
 ![data preparation](data-preparation.gif)
 
 ## Raising a Menu in The Spreadsheet
 
-Now click in the _Script Editor_ submenu inside the _Tools_ menu. After the script editor screen opens, click in _File_, then _New_, and finally in _Script file_. You can name the file whatever you want, but let us stick with _index_ for this post.
+Now click in the `Script Editor` submenu inside the `Tools` menu. After the script editor screen opens, click in `File`, then `New`, and finally in `Script file`. You can name the file whatever you want, but let us stick with `index` for this post.
 
-The first step is to write some code to create a menu option in the spreadsheet so we can use that to call our future dialog. We do that by creating an _onOpen_ function. This name is noted by the spreadsheet and called automatically whenever it opens.
+The first step is to write some code to create a menu option in the spreadsheet so we can use that to call our future dialog. We do that by creating an `onOpen` function. This name is noted by the spreadsheet and called automatically whenever it opens.
 
 ``` js
 function onOpen() {
@@ -34,13 +34,13 @@ function onOpen() {
 }
 ```
 
-For this time only, you need to reload the spreadsheet window after saving the script. The _My Script_ menu should be available after that.
+For this time only, you need to reload the spreadsheet window after saving the script. The `My Script` menu should be available after that.
 
 ## Hello World
 
 The Apps Scripts technology offers an [Html service](https://developers.google.com/apps-script/guides/html) that can render custom dialogs and sidebars on top of Google apps. This is great because we can leverage standard Html, CSS, and JavaScript together with their API to create a new layer of features over Google spreadsheets, for example.
 
-Let's create an Html file named _dialog_ in the scripts editor to start exploring this feature. By inserting the code below in the _dialog_ file we have a basic custom dialog.
+Let's create an Html file named `dialog` in the scripts editor to start exploring this feature. By inserting the code below in the `dialog` file we have a basic custom dialog.
 
 ``` html
 <!DOCTYPE html>
@@ -58,7 +58,7 @@ Let's create an Html file named _dialog_ in the scripts editor to start explorin
 
 Unfortunately, we have no way to invoke the dialog UI. Until now 😉. 
 
-To call the dialog, we need to go back to our _index_ file and create a _showSelectDialog_ function with the code below. You can see that the function hints to a template engine capability. This will be very useful to us in a moment.
+To call the dialog, we need to go back to our `index` file and create a `showSelectDialog` function with the code below. You can see that the function hints to a template engine capability. This will be very useful to us in a moment.
 
 ``` js
 function showSelectDialog(){
@@ -71,13 +71,13 @@ function showSelectDialog(){
 }
 ```
 
-We can test the dialog now. Our Hello World should appear whenever we click in the _Select multiple_ menu. Google Sheets will probably ask you for authorization to run the script. This could happen more than once during this project. Make sure everything sounds safe and click ok for the scripts to work. 
+We can test the dialog now. Our Hello World should appear whenever we click in the `Select multiple` menu. Google Sheets will probably ask you for authorization to run the script. This could happen more than once during this project. Make sure everything sounds safe and click ok for the scripts to work. 
 
 ## Inject Available Options
 
 The challenge now is to settle how to show all teams as options for the user to select. We can also create a mechanism to check if some teams are present in the cell and show them already selected for the user. 
 
-We need another function inside _index_ that uses the validation data for a cell as a database for available options. The function could also check if any of the options are already present in the cell and mark those as selected. Happily, Apps Scripts API does most of the heavy lifting for us. See the function. 
+We need another function inside `index` that uses the validation data for a cell as a database for available options. The function could also check if any of the options are already present in the cell and mark those as selected. Happily, Apps Scripts API does most of the heavy lifting for us. See the function. 
 
 ``` js
 function getOptionsFromCurrentCell(){
@@ -106,7 +106,7 @@ function getOptionsFromCurrentCell(){
 }
 ```
 
-The Apps Script template engine let us inject data in templates before rendering them. The data can then be used inside the template code. Now we update the _showSelectDialog_ function to pass the options data we grab in the _getOptionsFromCurrentCell_. Let me show you.
+The Apps Script template engine let us inject data in templates before rendering them. The data can then be used inside the template code. Now we update the `showSelectDialog` function to pass the options data we grab in the `getOptionsFromCurrentCell`. Let me show you.
 
 ``` js
 function showSelectDialog(){
@@ -125,7 +125,7 @@ function showSelectDialog(){
 
 Now we need to use that options data inside our template to render checkboxes for every option. The Apps Script template engine behaves like other typical JavaScript template languages. Details can be found [here](https://developers.google.com/apps-script/guides/html/templates).
 
-We revisit the _dialog_ file to render the checkboxes using _\<?= ?>_ and _\<? ?>_ special syntax as way to embed JavaScript inside the Html. Then use a standard script tag to write a function to clear or select all items.
+We revisit the `dialog` file to render the checkboxes using `\<?= ?>` and `\<? ?>` special syntax as way to embed JavaScript inside the Html. Then use a standard script tag to write a function to clear or select all items.
 
 ``` html
 <!DOCTYPE html>
@@ -176,7 +176,7 @@ But we still need a way to send the user-selected options back to the spreadshee
 
 ## Update Based on User Selection
 
-First, let's write a new function in the _index_ file that receives an array of choices as a parameter and set that content in the currently selected cell.
+First, let's write a new function in the `index` file that receives an array of choices as a parameter and set that content in the currently selected cell.
 
 ``` js
 function setOptionsForCurrentCell(selectedOptions){
@@ -191,7 +191,7 @@ function setOptionsForCurrentCell(selectedOptions){
 }
 ```
 
-Now we update the Html file to create a button and a new function that pass the that to _setOptionsForCurrentCell_.
+Now we update the Html file to create a button and a new function that pass the that to `setOptionsForCurrentCell`.
 
 ``` html
 <!DOCTYPE html>
@@ -255,7 +255,7 @@ Now we update the Html file to create a button and a new function that pass the 
 </html>
 ```
 
-You can can see in the _apply_ function that we called _setOptionsForCurrentCell_ via _google.script.run_. This is an asynchronous operation provided by the Apps Scripts API that offers other options like handlers for failed or successful calls. You can read more about it [here](https://developers.google.com/apps-script/guides/html/reference/run).
+You can can see in the `apply` function that we called `setOptionsForCurrentCell` via `google.script.run`. This is an asynchronous operation provided by the Apps Scripts API that offers other options like handlers for failed or successful calls. You can read more about it [here](https://developers.google.com/apps-script/guides/html/reference/run).
 
 By now our program should be working just fine, even if not very visually elegant.
 

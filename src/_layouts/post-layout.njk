@@ -3,10 +3,10 @@ layout: page-layout.njk
 ---
 {% from 'page-title.njk' import pageTitle %}
 
-<article>
+<div>
   {{ pageTitle(title) }}
-  <p class="text-xs text-center"><time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time></p>
-  <div class="mt-4 text-justify">
-  {{ content | safe }}
-  </div>
-</article>
+  <p class="post-date"><time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time></p>
+  <article class="post-content">
+    {{ content | safe }}
+  </article>
+</div>

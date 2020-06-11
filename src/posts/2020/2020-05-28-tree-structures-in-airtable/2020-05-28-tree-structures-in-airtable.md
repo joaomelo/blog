@@ -21,7 +21,7 @@ Since we are already talking about packages, don't worry if you are not familiar
 
 If you find yourself lost at any point have no worry. You can go to [this](https://github.com/joaomelo/tree-structures-in-airtable) repository and download the full app. I versioned it in different folders corresponding to each post milestone. 
 
-But enough of talking, let's code. We start with a skeleton _index.html_ just pulling the third party packages and our own future script file that will be created in a moment.
+But enough of talking, let's code. We start with a skeleton `index.html` just pulling the third party packages and our own future script file that will be created in a moment.
 
 ``` html
 <!DOCTYPE html>
@@ -47,18 +47,18 @@ But enough of talking, let's code. We start with a skeleton _index.html_ just pu
 </html>
 ```
 
-Now create an _index.js_ file in the same folder. For now, we write a dummy code just to test if things properly tighten.
+Now create an `index.js` file in the same folder. For now, we write a dummy code just to test if things properly tighten.
 
 ``` js
 const el = document.getElementById("app");
 el.innerHTML = "Hello World!"
 ```
 
-If you open _index.html_ in the local server of your choice, you will see our baby 👶 first step.
+If you open `index.html` in the local server of your choice, you will see our baby 👶 first step.
 
 ## Basic UI
 
-Airtable API needs three basic information: your personal API key, the base id where the given table is located, and the table name. We need to create some inputs to ask that from the user, a button to run our script and a message area to provide feedback. We can update the code inside the _main_ tag of our _index.html_ with the code below.
+Airtable API needs three basic information: your personal API key, the base id where the given table is located, and the table name. We need to create some inputs to ask that from the user, a button to run our script and a message area to provide feedback. We can update the code inside the `main` tag of our `index.html` with the code below.
 
 ``` html
 <main id="app">
@@ -93,7 +93,7 @@ Airtable API needs three basic information: your personal API key, the base id w
 </main>
 ```
 
-You can open the app now and cry in frustration since nothing changed 😭. That's because _index.js_ is overwriting everything inside _main_. With a small adjustment in the tag id, we change that.
+You can open the app now and cry in frustration since nothing changed 😭. That's because `index.js` is overwriting everything inside `main`. With a small adjustment in the tag id, we change that.
 
 ``` js
 const div = document.getElementById("logs");
@@ -104,7 +104,7 @@ Cool. Now the message is in the logs area and we can move on to pull data direct
 
 ## Reading Records from Airtable
 
-Before going to the nitty-gritty of loading records from Airtable, we must install the trigger that starts the whole operation. We do that by assigning a function to our Run button _onclick_ property. The function will grab the user input values and ask Airtable for the corresponding table records. In the following code, we declare some helpers functions and make the run button alive. There is also a silly version of what will be our loader function, so we can test the UI.
+Before going to the nitty-gritty of loading records from Airtable, we must install the trigger that starts the whole operation. We do that by assigning a function to our Run button `onclick` property. The function will grab the user input values and ask Airtable for the corresponding table records. In the following code, we declare some helpers functions and make the run button alive. There is also a silly version of what will be our loader function, so we can test the UI.
 
 ``` js
 // where everything starts
@@ -130,7 +130,7 @@ function run() {
 }
 ```
 
-The first step to proper load data is to create a _Table_ object using Airtable's library. This object will have the methods needed to update and read from Airtable.
+The first step to proper load data is to create a `Table` object using Airtable's library. This object will have the methods needed to update and read from Airtable.
 
 ``` js
 function run() {
@@ -151,7 +151,7 @@ function run() {
 }
 ```
 
-Inside _loadRecords_, we use the _select_ method from the _Table_ object to create a _query_ object. The query has an _eachPage_ method that paginates through all records in a table applying a provided callback function and returning a Promise at the end. Let's put that design to action to fill an array with records.
+Inside `loadRecords`, we use the `select` method from the `Table` object to create a `query` object. The query has an `eachPage` method that paginates through all records in a table applying a provided callback function and returning a Promise at the end. Let's put that design to action to fill an array with records.
 
 ``` js
 function loadRecords(table) {
@@ -228,7 +228,7 @@ function updatePaths(table, records) {
 }
 ```
 
-Even without knowing how to send the new data to Airtable, yet 😉. We could write a minimal version of the _updateRecord_ function just to check if our algorithm is working. Please add the following instructions.
+Even without knowing how to send the new data to Airtable, yet 😉. We could write a minimal version of the `updateRecord` function just to check if our algorithm is working. Please add the following instructions.
 
 ``` js
 function updateRecord(table, id, entries) {
@@ -238,15 +238,15 @@ function updateRecord(table, id, entries) {
 
 ## Updating Airtable
 
-That _table_ object we have been talking about has an _update_ method to send changes to Airtable. But we need to take care of their rate limits first.
+That `table` object we have been talking about has an `update` method to send changes to Airtable. But we need to take care of their rate limits first.
 
 Airtable won't allow more than five calls per second to its API. If at some point the app tries to update many records at once, we will find ourselves been punished with a 30 seconds penalty. That definitely is not cool.
 
-There are gracious ways to secure that, especially with packages like [rxjs](https://rxjs-dev.firebaseapp.com/) and [bottleneck](https://github.com/SGrondin/bottleneck) - make sure to check the second one if you're going seriously into API calls. But we will use a simpler approach by forcing a waiting time before each update call to Airtable using _setTimeout_.
+There are gracious ways to secure that, especially with packages like [rxjs](https://rxjs-dev.firebaseapp.com/) and [bottleneck](https://github.com/SGrondin/bottleneck) - make sure to check the second one if you're going seriously into API calls. But we will use a simpler approach by forcing a waiting time before each update call to Airtable using `setTimeout`.
 
 We do that by saving the time of the last API call in a variable outside the function. Then we compare the distance from the present moment to that last call and subtract that distance from a minimal 200 milliseconds interval between calls (1 second divided by the maximum 5 calls per second).
 
-We go on creating a Promise that will resolve with the call to the _update_ method, but just when setTimeout is done with the calculated timeout. Finally, we update the _last_ variable with the projected future moment when the timeout concludes. I think the code should make it more clear.
+We go on creating a Promise that will resolve with the call to the `update` method, but just when setTimeout is done with the calculated timeout. Finally, we update the `last` variable with the projected future moment when the timeout concludes. I think the code should make it more clear.
 
 ``` js
 let last;
