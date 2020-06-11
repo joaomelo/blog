@@ -6,7 +6,7 @@
   --accent-warn: #FFE66D;
   --font-heading: 'Roboto', sans-serif;
   --font-text: 'Noto Sans JP', sans-serif;
-  --border: 2px dashed var(--accent-danger);
+  --border: 4px dashed var(--primary);
 }
 
 * {
@@ -76,3 +76,27 @@ a:hover, a:active {
   color: var(--accent-danger);
 }
 
+.tag, .tag:visited {
+  background-color: var(--secondary);
+  color: var(--primary);
+  padding: 1px 8px;
+  margin: 0px 2px;
+}
+
+.tag:hover, .tag:active {
+  background-color: var(--accent-danger);
+  color: var(--bg-color);
+}
+
+.page-title {
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.post-list-item {
+  margin-top: 32px;
+}
+
+.post-list-item-abstract {
+  text-align: justify;
+}

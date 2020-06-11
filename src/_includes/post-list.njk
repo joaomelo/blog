@@ -1,11 +1,9 @@
 {% macro postList(posts) %}
 
 {% for post in posts %}
-  <article class="mt-2">
-    <h2 class="text-xl font-semibold hover:text-green-400">
-      <a href="{{ post.url | url }}">{{ post.data.title }}</a>
-    </h2>
-    <p class="text-base text-justify">{{post.data.abstract}}</p>
+  <article class="post-list-item">
+    <h2><a href="{{ post.url | url }}">{{ post.data.title }}</a></h2>
+    <p class="post-list-item-abstract">{{post.data.abstract}}</p>
   </article>
 {% endfor %}
 

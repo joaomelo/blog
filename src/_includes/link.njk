@@ -4,5 +4,5 @@
 
 {%- macro tag(tag) -%}
   {% set tagUrl %}/tags/{{ tag }}/{% endset %}
-  <a href="{{ tagUrl | url }}" class="bg-green-200 hover:bg-green-400 px-2 mx-1 my-1">{{ tag }}</a>
+  <a href="{{ tagUrl | url }}" class="tag">{{ tag }}</a>
 {%- endmacro -%}
