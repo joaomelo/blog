@@ -6,6 +6,7 @@ layout: page-layout.njk
 <div>
   {{ pageTitle(title) }}
   <p class="post-date"><time datetime="{{ page.date | dateIso }}">{{ page.date | dateReadable }}</time></p>
+  <p>{{ cover }}</p>
   <article class="post-content">
     {{ content | safe }}
   </article>

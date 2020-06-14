@@ -1,10 +1,10 @@
 {
   "name": "blog",
   "version": "0.3.11",
-  "description": "my personal blog",
-  "main": "index.js",
+  "description": "I am an enthusiast of how leadership and technology combine to create amazing things together 🤓. I decided to blog about it as I learn what I can.",
   "scripts": {
     "clean": "rimraf docs/*",
+    "debug": "npm run clean && cross-env ELEVENTY_ENV=dev DEBUG=Eleventy* eleventy --serve",
     "start": "npm run clean && cross-env ELEVENTY_ENV=dev eleventy --serve",
     "build": "npm run clean && cross-env ELEVENTY_ENV=prod eleventy",
     "commit": "git add -A && git commit",
@@ -28,6 +28,7 @@
     "@11ty/eleventy": "^0.11.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^3.0.1",
     "@toycode/markdown-it-class": "^1.2.4",
+    "canvas": "^2.6.1",
     "cross-env": "^7.0.2",
     "moment": "^2.26.0",
     "rimraf": "^3.0.2"
