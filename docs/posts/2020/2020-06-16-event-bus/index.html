@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128497960-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128497960-2');
+      </script>
+
+      <!-- Hotjar -->
+      <script>
+        (function(h,o,t,j,a,r){
+            h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+            h._hjSettings={hjid:1853396,hjsv:6};
+            a=o.getElementsByTagName('head')[0];
+            r=o.createElement('script');r.async=1;
+            r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+      </script>
+      
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto&display=swap" rel="stylesheet">
+    <link href="/styles/index.css" rel="stylesheet">
+
+    <title>blog.melo.plus</title>
+  </head>
+  <body>
+    
+
+    <header>
+      <h1>
+        <a href="/" target="_self">melo.plus</a> 
+          
+      </h1>
+    </header>
+
+    <div class="container">
+      <main>
+        
+
+<div>
+  
+  <h1 class="page-title">Building an Event Bus With Vanilla JavaScript</h1>
+
+  <p class="post-date"><time datetime="2020-06-16T03:00:00.000Z">June 16, 2020</time></p>
+  <article class="post-content">
+    <p class="post-paragraph">The Event Bus is a typical pattern in programming to decouple pieces of an app. It is a central interface to signal or react to behavior like logging or alerting. Some modules can subscribe to an event without any knowledge of the publisher component and vice-versa.</p>
+<p class="post-paragraph">This kind of technic is commonly seen in large infrastructures as a way to provide integration between services. But even in small codebases, the Event Bus could be a practical way to provide features of general use to the whole app. A module may import the central Bus to signal the start of some task, and some other module would automatically trigger a UI loading screen.</p>
+<h2 class="post-subtitle">Building an Event Bus</h2>
+<p class="post-paragraph">A viable version could be achieved very fast. Let's start that by implementing a <code>subscribe</code> function that feeds a <code>Map</code> of subscriptions. A subscription by itself will be an array of observers functions to be called when some specific event type (also known as a topic) is published.</p>
+<pre class="language-js"><code class="language-js"><span class="token comment">// event-bus.js</span><br><span class="token keyword">const</span> subscriptions <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Map</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token keyword">function</span> <span class="token function">subscribe</span> <span class="token punctuation">(</span><span class="token parameter">topic<span class="token punctuation">,</span> observer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>subscriptions<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    subscriptions<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>topic<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br>  <span class="token keyword">const</span> subscription <span class="token operator">=</span> subscriptions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  subscription<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">export</span> <span class="token punctuation">{</span> subscribe <span class="token punctuation">}</span></code></pre>
+<p class="post-paragraph">Then, we implement the <code>publish</code> function to invoke all the observer functions associated with a topic, passing some arbitrary parameter.</p>
+<pre class="language-js"><code class="language-js"><span class="token comment">// event-bus.js</span><br><br><span class="token comment">// ... subscribe code</span><br><br><span class="token keyword">function</span> <span class="token function">publish</span> <span class="token punctuation">(</span><span class="token parameter">topic<span class="token punctuation">,</span> payload</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>subscriptions<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span><br>  <span class="token keyword">const</span> subscription <span class="token operator">=</span> subscriptions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  subscription<span class="token punctuation">.</span><span class="token function">forEach</span><span class="token punctuation">(</span><span class="token parameter">observer</span> <span class="token operator">=></span> <span class="token function">observer</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token punctuation">}</span><br><br><span class="token keyword">export</span> <span class="token punctuation">{</span> subscribe<span class="token punctuation">,</span> publish <span class="token punctuation">}</span></code></pre>
+<p class="post-paragraph">Now, other modules became able to import <code>subscribe</code> and <code>publish</code> to take advantage of our Event Bus.</p>
+<pre class="language-js"><code class="language-js"><span class="token comment">// subscriber.js</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> subscribe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./event-bus'</span><span class="token punctuation">;</span><br><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'SOME_EVENT'</span><span class="token punctuation">,</span> <span class="token parameter">payload</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'SOME_EVENT'</span><span class="token punctuation">,</span> <span class="token parameter">payload</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><br><span class="token comment">// publisher.js</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> publish <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./event-bus'</span><span class="token punctuation">;</span><br><span class="token function">publish</span><span class="token punctuation">(</span><span class="token string">'SOME_EVENT'</span><span class="token punctuation">,</span> <span class="token string">'hi'</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 class="post-subtitle">Improvements and Tradeoffs</h2>
+<p class="post-paragraph">That's it, we have an app with a working Event Bus. That might be improved to offer additional features as needed. For example, with two lines of code, <code>subscribe</code> could return an unsubscribe function. When called, unsubscribe removes the observer from the respective topic's subscription.</p>
+<pre class="language-js"><code class="language-js"><span class="token keyword">function</span> <span class="token function">subscribe</span> <span class="token punctuation">(</span><span class="token parameter">topic<span class="token punctuation">,</span> observer</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>  <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>subscriptions<span class="token punctuation">.</span><span class="token function">has</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><br>    subscriptions<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>topic<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token punctuation">}</span><br>  <span class="token keyword">const</span> subscription <span class="token operator">=</span> subscriptions<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>topic<span class="token punctuation">)</span><span class="token punctuation">;</span><br>  subscription<span class="token punctuation">.</span><span class="token function">push</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">;</span><br><br>  <span class="token keyword">const</span> <span class="token function-variable function">unsubscribe</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=></span> subscription<span class="token punctuation">.</span><span class="token function">splice</span><span class="token punctuation">(</span>subscription<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span>observer<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br>  <span class="token keyword">return</span> unsubscribe<span class="token punctuation">;</span>  <br><span class="token punctuation">}</span></code></pre>
+<p class="post-paragraph">Now someone can remove itself from listening like this:</p>
+<pre class="language-js"><code class="language-js"><span class="token comment">// subscriber.js</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> subscribe <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./event-bus'</span><span class="token punctuation">;</span><br><span class="token keyword">const</span> unsub <span class="token operator">=</span> <span class="token function">subscribe</span><span class="token punctuation">(</span><span class="token string">'SOME_EVENT'</span><span class="token punctuation">,</span> <span class="token parameter">payload</span> <span class="token operator">=></span> console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span><br><span class="token function">unsub</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <br><br><span class="token comment">// publisher.js</span><br><span class="token keyword">import</span> <span class="token punctuation">{</span> publish <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'./event-bus'</span><span class="token punctuation">;</span><br><span class="token function">publish</span><span class="token punctuation">(</span><span class="token string">'SOME_EVENT'</span><span class="token punctuation">,</span> <span class="token string">'hi'</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// nothing will be printed </span></code></pre>
+<p class="post-paragraph">Other improvements are available. There was no code to deal with exceptions in observers, or maybe we could add the ability to an observer be called immediately after subscribing with the last published payload.</p>
+<p class="post-paragraph">But probably it is best to consider some proven library if you want something sophisticated. For example, I made a <a href="https://github.com/joaomelo/bus">package</a> with the beforementioned ability to immediately be called after subscription. But the gold standard for event utilities is <a href="https://rxjs-dev.firebaseapp.com/">Rxjs</a>. The library's <code>Subject</code> class is an excellent candidate to build Event Buses.</p>
+<p class="post-paragraph">Nevertheless, it is relevant to note that the solution is not free of tradeoffs. Because of its potential to be used everywhere, a failing one would be disastrous for an app. Another issue is that as complexity and signal rate rises, the Event Bus could become a performance challenge.</p>
+<p class="post-paragraph">That's it, friends. I leave you with my best regards 🤗.</p>
+
+  </article>
+</div>
+      </main>
+      <footer>
+        <div class="tags">
+          
+            
+  <a href="/tags/API/" class="content-tag">API</a>
+          
+            
+  <a href="/tags/airtable/" class="content-tag">airtable</a>
+          
+            
+  <a href="/tags/auth/" class="content-tag">auth</a>
+          
+            
+  <a href="/tags/firebase/" class="content-tag">firebase</a>
+          
+            
+  <a href="/tags/google apps script/" class="content-tag">google apps script</a>
+          
+            
+  <a href="/tags/patterns/" class="content-tag">patterns</a>
+          
+            
+  <a href="/tags/reactivity/" class="content-tag">reactivity</a>
+          
+        </div>
+        <p class="about">Hi! My name is João Melo. I am enthusiastic about how determination and technology combine to create amazing things 🤓. I decided to blog about it as I learn what I can. You can get updates from <a href="https://twitter.com/joaomeloplus" target="_blank">Twitter</a>, and also find me on <a href="https://github.com/joaomelo" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/joaomelo81/?locale=en_US" target="_blank">LinkedIn</a></p>          
+        <p class="license">content here is copylefted under <a href="https://choosealicense.com/licenses/cc-by-sa-4.0/" target="_blank">CC-BY-SA-4.0</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
