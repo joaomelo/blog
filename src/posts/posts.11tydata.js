@@ -10,7 +10,7 @@ module.exports = {
 
       result.push('<meta name="twitter:card" content="summary_large_image">');
       result.push(`<meta name="twitter:title" content="${data.title}">`);
-      result.push(`<meta name="twitter:image" content="${sitePath}">`);
+      result.push(`<meta name="twitter:image" content="https://blog.melo.plus${sitePath}">`);
 
       return result;
     }
