@@ -21,7 +21,7 @@ module.exports = function createCover(data) {
   context.fillRect(0, 0, width, height);
 
   // create dashed border
-  const margin = 45;
+  const margin = 20;
   context.lineWidth = 10;
   context.setLineDash([60, 10]);
   context.strokeStyle = "#1A535C"
@@ -63,7 +63,7 @@ function calcSitePath(inputPath) {
 };
 
 function fillText(ctx, text, x, y, maxWidth) {
-  const lineGap = 10;
+  const lineGap = 15;
   const fontHeight = parseInt(ctx.font.match(/\d+/), 10);
   const lineHeight =  fontHeight + lineGap;
   const wrapedText = parseLines(ctx, text, maxWidth);
