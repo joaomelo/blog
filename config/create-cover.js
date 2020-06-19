@@ -43,15 +43,20 @@ module.exports = function createCover(data) {
   const buffer = canvas.toBuffer('image/png');
   fs.writeFileSync(coverPath, buffer);
 
-  return coverPath
+  return calcSitePath(data.page.inputPath);
 };
 
 function calcCoverPath(inputPath) {
+  const coverPath = `${process.cwd()}\\docs${calcSitePath(inputPath)}`;
+  return coverPath;
+};
+
+function calcSitePath(inputPath) {
   const dashPos = inputPath.lastIndexOf('/');
   const dotPos = inputPath.lastIndexOf('.');
   const fileName = inputPath.substring(dashPos + 1, dotPos);
-  const coverPath = `${process.cwd()}\\docs\\media\\${fileName}-cover.png`;
-  return coverPath;
+  const sitePath = `\\media\\${fileName}-cover.png`;
+  return sitePath;  
 };
 
 function fillText(ctx, text, x, y, maxWidth) {

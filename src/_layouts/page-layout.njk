@@ -28,6 +28,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+    {% for meta in extraMetas %}
+      {{ meta | safe }}
+    {% endfor %}
+
     <link rel="icon" type="image/png" href="/media/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <link href="/styles/index.css" rel="stylesheet">
