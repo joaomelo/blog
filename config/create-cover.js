@@ -21,7 +21,7 @@ module.exports = function createCover(data) {
   context.fillRect(0, 0, width, height);
 
   // create dashed border
-  const margin = 20;
+  const margin = 50;
   context.lineWidth = 10;
   context.setLineDash([60, 10]);
   context.strokeStyle = "#1A535C"
@@ -29,19 +29,21 @@ module.exports = function createCover(data) {
 
   // text general
   context.textAlign = 'center';
+  context.textBaseline = 'top';
   context.fillStyle = '#1A535C';
   const textCenter = width / 2;
-  const textWidth = width - (4 * margin);
+  const textWidth = width - (3 * margin);
 
   context.font = '60pt "Roboto Medium"';
-  fillText(context, data.title, textCenter, margin * 3, textWidth);
+  fillText(context, data.title, textCenter, margin * 1.2, textWidth);
 
   context.font = '30pt "Noto Sans JP Medium"';  
-  fillText(context, data.abstract, textCenter, height * (3/5), textWidth);
+  fillText(context, data.abstract, textCenter, height / 2, textWidth);
 
-  context.font = '20pt "Noto Sans JP Medium"';  
+  context.font = '25pt "Noto Sans JP Medium"';  
   context.fillStyle = '#FF6B6B';
-  fillText(context, 'blog.melo.plus', textCenter, height - margin * 2, textWidth);
+  context.textBaseline = 'bottom';
+  fillText(context, 'blog.melo.plus', textCenter, height - (margin * 1.2), textWidth);
 
   const buffer = canvas.toBuffer('image/png');
   fs.writeFileSync(coverPath, buffer);
