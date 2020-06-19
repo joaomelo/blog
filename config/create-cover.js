@@ -27,27 +27,18 @@ module.exports = function createCover(data) {
   context.strokeStyle = "#1A535C"
   context.strokeRect(margin, margin, width - 2 * margin, height - 2 * margin);
 
-  // heading
-  // https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Drawing_text
-  const heading = data.title;
+  // text general
+  context.textAlign = 'center';
+  context.fillStyle = '#1A535C';
+  const textCenter = width / 2;
+  const textWidth = width - (4 * margin);
+
   context.font = '60pt "Roboto Medium"';
-  context.textAlign = 'center';
-  context.fillStyle = '#000';
-  context.fillText(heading, 600, 170);
+  fillText(context, data.title, textCenter, margin * 4, textWidth);
 
-  // abstract
-  const abstract = 'i am a noto abstract';
-  context.font = '30pt "Noto Sans JP Medium"';
-  context.textAlign = 'center';
-  context.fillStyle = '#000';
-  context.fillText(abstract, 600, height / 2);
-
-  // site
-  const site = 'blog.melo.plus';
-  context.font = '20pt "Noto Sans JP Medium"';
-  context.textAlign = 'center';
-  context.fillStyle = '#000';
-  context.fillText(site, 600, height - margin * 2);
+  context.font = '20pt "Noto Sans JP Medium"';  
+  fillText(context, data.abstract, textCenter, height * (3/5), textWidth);
+  fillText(context, 'blog.melo.plus', textCenter, height - margin * 2, textWidth);
 
   const buffer = canvas.toBuffer('image/png');
   fs.writeFileSync(coverPath, buffer);
@@ -61,4 +52,31 @@ function calcCoverPath(inputPath) {
   const fileName = inputPath.substring(dashPos + 1, dotPos);
   const coverPath = `${process.cwd()}\\docs\\media\\${fileName}-cover.png`;
   return coverPath;
+};
+
+function fillText(ctx, text, x, y, maxWidth) {
+  const lineGap = 10;
+  const fontHeight = parseInt(ctx.font.match(/\d+/), 10);
+  const lineHeight =  fontHeight + lineGap;
+  const wrapedText = parseLines(ctx, text, maxWidth);
+  wrapedText.forEach((line, i) => ctx.fillText(line, x, y + (i * lineHeight)));
+};
+
+function parseLines(ctx, text, maxWidth) {
+  var words = text.split(" ");
+  var lines = [];
+  var currentLine = words[0];
+
+  for (var i = 1; i < words.length; i++) {
+      var word = words[i];
+      var width = ctx.measureText(currentLine + " " + word).width;
+      if (width < maxWidth) {
+          currentLine += " " + word;
+      } else {
+          lines.push(currentLine);
+          currentLine = word;
+      }
+  }
+  lines.push(currentLine);
+  return lines;
 }
