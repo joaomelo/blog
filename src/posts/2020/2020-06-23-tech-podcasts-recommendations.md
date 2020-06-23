@@ -1,5 +1,5 @@
 --- 
-tags: ['education']
+tags: ['featured', 'education']
 title: Tech Podcasts Recommendations
 abstract: A curated list of tech podcasts spiced with some non-related golden choices.
 --- 
