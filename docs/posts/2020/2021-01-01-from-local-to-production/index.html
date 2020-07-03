@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+      <!-- Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128497960-2"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128497960-2');
+      </script>
+      
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    
+      <meta name="twitter:card" content="summary_large_image">
+    
+      <meta name="twitter:title" content="Development Firebase Setup Series Pt 1 - Local Development With Webpack and Firebase Emulators">
+    
+      <meta name="twitter:image" content="https://blog.melo.plus\media\2021-01-01-from-local-to-production-cover.png">
+    
+
+    <link rel="icon" type="image/png" href="/media/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
+    <link href="/styles/index.css" rel="stylesheet">
+
+    <title>blog.melo.plus</title>
+  </head>
+  <body>
+    
+
+    <header>
+      <h1>
+        <a href="/" target="_self">melo.plus</a> 
+          
+      </h1>
+    </header>
+
+    <div class="container">
+      <main>
+        
+
+<div>
+  
+  <h1 class="page-title">Development Firebase Setup Series Pt 1 - Local Development With Webpack and Firebase Emulators</h1>
+
+  <p class="post-date"><time datetime="2021-01-01T02:00:00.000Z">January 1, 2021</time></p>
+  <p></p>
+  <article class="post-content">
+    <p class="post-paragraph">Develops Friendly Cloud Infrastructure and Automation are great allies to help developers couple with tech challenges. They can be leveraged to reduce management errors during development lifecycle and also gain agility with short cycles of implementation. Firebase suite of products and Github Actions are great examples of such tools.</p>
+<p class="post-paragraph">In this series we will explore the setup of a Firebase project to operate with lees boilerplate in multiple environment and activate continuos delivery from pushes to GutHub master branch. The first post is all about the local enviroment.</p>
+<h2 class="post-subtitle">Install setup cloud project with hosting, auth and firestore</h2>
+<p class="post-paragraph">Since we will be using Firebase we should create a project now. You can go to the Firebase site and create a project if you don't already have one. Then active Firebase hsoting, firestore, and simple email and password authentication.</p>
+<p class="post-paragraph">If you have any doubts about that check this video.</p>
+<h2 class="post-subtitle">Download Boilerplate</h2>
+<p class="post-paragraph">Since the main focus of this series is enviroment setup we will just copy the code content.</p>
+<pre><code>git clone ....
+</code></pre>
+<p class="post-paragraph">This will download our project code and basic package setup. The code is a simple login form that gives access to a UI to add items. After downloading use the terminal to tell npm to install the project dependencies.</p>
+<pre><code>npm i
+</code></pre>
+<h2 class="post-subtitle">Init the firebase configuration</h2>
+<p class="post-paragraph">Still in the terminal we initialize and link it to the Firebase one. This link has a nice overview how to do that. For our case, run the followings commands:</p>
+<pre><code>commands
+</code></pre>
+<h2 class="post-subtitle">Setup Webpack for continuos build</h2>
+<p class="post-paragraph">We create our webpack we start by setting it up the compile the code.</p>
+<pre><code>code
+</code></pre>
+<p class="post-paragraph">We can create add a npm script coutiound the code after code edits.</p>
+<pre><code>script
+</code></pre>
+<p class="post-paragraph">Now we need a solution to serve the code locally. Traditionally i used the webpack dev server. but since we going for the firebase emulator suite, the hosting emulator will be natural choice to secure proper running.</p>
+<h2 class="post-subtitle">Integrate Firebase Emulators</h2>
+<p class="post-paragraph">This series is still in development. The next post i intend to Integrate a test suite to make things more secure in local developement and better conditions for continous delivery with github actions.</p>
+
+  </article>
+</div>
+      </main>
+      <footer>
+        <div class="tags">
+          
+            
+  <a href="/tags/API/" class="content-tag">API</a>
+          
+            
+  <a href="/tags/airtable/" class="content-tag">airtable</a>
+          
+            
+  <a href="/tags/auth/" class="content-tag">auth</a>
+          
+            
+  <a href="/tags/devops/" class="content-tag">devops</a>
+          
+            
+  <a href="/tags/education/" class="content-tag">education</a>
+          
+            
+  <a href="/tags/firebase/" class="content-tag">firebase</a>
+          
+            
+  <a href="/tags/google apps script/" class="content-tag">google apps script</a>
+          
+            
+  <a href="/tags/patterns/" class="content-tag">patterns</a>
+          
+            
+  <a href="/tags/reactivity/" class="content-tag">reactivity</a>
+          
+        </div>
+        <p class="about">Hi! My name is João Melo. I am enthusiastic about how determination and technology combine to create amazing things 🤓. I decided to blog about it as I learn what I can. You can get updates from <a href="https://twitter.com/joaomeloplus" target="_blank">Twitter</a>, and also find me on <a href="https://github.com/joaomelo" target="_blank">GitHub</a> or <a href="https://www.linkedin.com/in/joaomelo81/?locale=en_US" target="_blank">LinkedIn</a></p>          
+        <p class="license">content here is copylefted under <a href="https://choosealicense.com/licenses/cc-by-sa-4.0/" target="_blank">CC-BY-SA-4.0</a></p>
+      </footer>
+    </div>
+  </body>
+</html>

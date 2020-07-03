@@ -1,5 +1,5 @@
 --- 
-tags: ['featured', 'firebase', 'auth']
+tags: ['firebase', 'auth']
 title: How To Combine Firebase Authentication And Firestore To Save User Data
 abstract: A guide about using Firestore documents to extend the management of user profile data beyond the fixed set of properties offered by Firebase Authentication.
 --- 
