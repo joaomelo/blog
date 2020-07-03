@@ -1,7 +1,7 @@
 --- 
 tags: ['featured', 'devops', 'firebase']
-title: Using Firebase Automatic URLs To Improve Development Workflow
-abstract: Firebase offers a way to automatic setup and initialize projects inside the app. These hosting URLs can be an ally to reduce codebase and facilitate development workflows like continuous delivery. The post explores how and why to use them in JavaScript web apps.
+title: Dev Workflow with Firebase Auto Hosting URLs
+abstract: Firebase offers automatic initialization with hosting URLs. They can be an ally to reduce codebase and facilitate tasks like continuous delivery. The post explores how and why to use them in JavaScript web apps.
 --- 
 
 If you've been using [Firebase](https://firebase.google.com) in your JavaScript projects for some time, there is a good chance you link your app to Firebase using a configuration object. First installing the Firebase [npm package](https://www.npmjs.com/package/firebase), then importing and using it in the source code similarly to the instructions below.
