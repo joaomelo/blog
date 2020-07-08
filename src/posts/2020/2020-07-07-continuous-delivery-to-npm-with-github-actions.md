@@ -1,6 +1,6 @@
 --- 
 tags: ['featured', 'devops', 'github']
-title: Continous Deliver to NPM With GitHub Actions.
+title: Continuous Delivery To NPM With GitHub Actions
 abstract: How to use GitHub Actions to automatically version, test, and publish NPM packages.
 --- 
 
