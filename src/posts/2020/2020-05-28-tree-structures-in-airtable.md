@@ -1,5 +1,5 @@
 --- 
-tags: ['featured', 'airtable', 'API']
+tags: ['featured', 'airtable', 'api']
 title: Tree Structures in Airtable
 abstract: How to arrange Airtable's records in tree structures building an app to update data using their official API.
 --- 
