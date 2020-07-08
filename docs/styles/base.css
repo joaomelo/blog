@@ -35,11 +35,6 @@ footer {
   margin: 32px 0px;
 }
 
-.tags {
-  display: flex;
-  justify-content: center;
-}
-
 .about {
   margin: 32px;
   padding: 16px;
@@ -75,11 +70,17 @@ a:hover, a:active {
   color: var(--accent);
 }
 
+.tags {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .content-tag, .content-tag:visited {
   background-color: var(--secondary);
   color: var(--primary);
   padding: 1px 8px;
-  margin: 0px 2px;
+  margin: 4px 2px 0px;
 }
 
 .content-tag:hover, .content-tag:active {
