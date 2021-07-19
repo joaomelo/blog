@@ -4,4 +4,4 @@ title: I am a draft
 abstract: Draft posts should have only the draft tag
 --- 
 
-I am a draft to be used as a example
+I am a draft to be used as an example

@@ -1,4 +1,6 @@
 const fs = require('fs');
+// deprecated and not used for now
+// node-canvas has an unfit set of binaries dependencies
 const { registerFont, createCanvas } = require('canvas');
 
 module.exports = function createCover(data) {
