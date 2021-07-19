@@ -9,7 +9,7 @@
     "build": "npm run clean && cross-env ELEVENTY_ENV=prod eleventy",
     "commit": "git add -A && git commit",
     "push": "git push && git push --tags",
-    "publish": "npm run build && npm run commit && npm version patch && npm run push"
+    "deploy": "npm run build && npm run commit && npm version patch && npm run push"
   },
   "repository": {
     "type": "git",
