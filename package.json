@@ -1,6 +1,6 @@
 {
   "name": "blog",
-  "version": "0.3.32",
+  "version": "0.3.33",
   "description": "I am an enthusiast of how leadership and technology combine to create amazing things together 🤓. I decided to blog about it as I learn what I can.",
   "scripts": {
     "clean": "rimraf docs/*",
